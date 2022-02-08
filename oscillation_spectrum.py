@@ -33,7 +33,6 @@ x = np.linspace(2100, 2400, 10000) # range of frequencies to be plotted
 
 plt.figure(figsize=(8, 5))
 
-
 Amp_solar = 2.1 #ppm 
 L_solar = 3.846e26 #Watts 
 M_solar = 1.989e30 #kg
@@ -47,6 +46,17 @@ T_eff = Teff_solar
 Tred = 8907*((L/L_solar)**-0.093)
 beta = 1 - np.exp((T_eff - Tred)/deltaT)
 amplitude = Amp_solar*beta*(L/L_solar)*(M_solar/M)*(Teff_solar/T_eff)**2
+
+print(amplitude)
+
+T0 = 436 #+- 24 K
+gamma0 = 1.02 #+- 0.07 microHz
+
+#Linewidth
+linewidth = gamma0*np.exp((T_eff-Teff_solar)/T0)
+
+#Height in FREQUENCYDOMAIN
+Height = (2*amplitude**2)/(np.pi*linewidth)
 
 
 # use for loops to plot all the values of n and l
